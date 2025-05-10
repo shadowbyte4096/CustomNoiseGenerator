@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background_grey">#FF1E1F22</color>
+    <color name="canvas_grey">#FF2B2D30</color>
+    <color name="canvas_margin">#FF242628</color>
+</resources>
