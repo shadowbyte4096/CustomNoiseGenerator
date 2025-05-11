@@ -53,9 +53,8 @@ public class GraphCanvas extends View {
 
         marginRect = new RectF(circleRadius, circleRadius, canvasWidth - circleRadius, canvasHeight - circleRadius);
 
-        points.add(new MoveableCircle(circleRadius, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
-        points.add(new MoveableCircle(canvasWidth/2, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
-        points.add(new MoveableCircle(canvasWidth/2, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
+        points.add(new MoveableCircle(canvasWidth/4, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
+        points.add(new MoveableCircle(3*canvasWidth/4, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
     }
 
     @Override
@@ -111,9 +110,7 @@ public class GraphCanvas extends View {
                         point.Pos.Y = newY;
                     }
                 }
-
-                points.sort((p1, p2) -> Float.compare(p1.Pos.GetX(), p2.Pos.GetX()));
-                invalidate();
+                RefreshPoints();
                 return true;
             }
             case MotionEvent.ACTION_UP:
@@ -126,6 +123,16 @@ public class GraphCanvas extends View {
         return super.onTouchEvent(event);
     }
 
+    public void AddPoint(){
+        points.add(new MoveableCircle(canvasWidth/2, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
+        RefreshPoints();
+    }
+
+    public void RemovePoint(){
+        points.remove(0);
+        RefreshPoints();
+    }
+
     public List<Position> GetPositions(){
         List<Position> positions = new ArrayList<>();
         for (MoveableCircle point : points) {
@@ -135,5 +142,10 @@ public class GraphCanvas extends View {
             positions.add(percentage);
         }
         return positions;
+    }
+
+    private void RefreshPoints(){
+        points.sort((p1, p2) -> Float.compare(p1.Pos.GetX(), p2.Pos.GetX()));
+        invalidate();
     }
 }

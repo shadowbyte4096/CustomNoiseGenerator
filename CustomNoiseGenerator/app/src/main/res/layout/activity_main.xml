@@ -1,9 +1,8 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background_grey">
+    android:background="@color/background_grey"
+    android:orientation="vertical">
 
     <!-- Frequency Graph -->
     <com.spooner.studios.customnoisegenerator.GraphCanvas
@@ -11,18 +10,53 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_margin="25dp"
-        android:background="@color/canvas_grey"/>
+        android:background="@color/canvas_grey" />
 
-    <!-- Buttons -->
-    <Button
-        android:id="@+id/playButton"
+
+    <!-- Add and Remove -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Play Noise" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/stopButton"
+        <Button
+            android:id="@+id/removePointButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minus_symbol" />
+
+        <!-- Spacer View -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addPointButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plus_symbol" />
+    </LinearLayout>
+
+    <!-- Play and Stop -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Stop Noise" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/play_noise" />
+
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/stop_noise" />
+    </LinearLayout>
+
 </LinearLayout>

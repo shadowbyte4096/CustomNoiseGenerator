@@ -2,6 +2,6 @@
     <string name="app_name">Custom Noise Generator</string>
     <string name="play_noise">Play</string>
     <string name="stop_noise">Stop</string>
-    <string name="plus_symbol">-</string>
-    <string name="minus_symbol">+</string>
+    <string name="minus_symbol">-</string>
+    <string name="plus_symbol">+</string>
 </resources>
