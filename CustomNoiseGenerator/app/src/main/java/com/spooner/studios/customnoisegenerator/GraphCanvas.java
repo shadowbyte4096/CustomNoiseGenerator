@@ -55,6 +55,7 @@ public class GraphCanvas extends View {
 
         points.add(new MoveableCircle(circleRadius, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
         points.add(new MoveableCircle(canvasWidth/2, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
+        points.add(new MoveableCircle(canvasWidth/2, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
     }
 
     @Override
@@ -110,6 +111,8 @@ public class GraphCanvas extends View {
                         point.Pos.Y = newY;
                     }
                 }
+
+                points.sort((p1, p2) -> Float.compare(p1.Pos.GetX(), p2.Pos.GetX()));
                 invalidate();
                 return true;
             }
