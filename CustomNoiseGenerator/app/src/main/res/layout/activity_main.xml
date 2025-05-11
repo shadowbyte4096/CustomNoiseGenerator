@@ -13,7 +13,7 @@
         android:background="@color/canvas_grey" />
 
 
-    <!-- Add and Remove -->
+    <!-- Add, Toggle, Remove -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,38 +25,18 @@
             android:layout_height="wrap_content"
             android:text="@string/minus_symbol" />
 
-        <!-- Spacer View -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
         <Button
-            android:id="@+id/addPointButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/plus_symbol" />
-    </LinearLayout>
-
-    <!-- Play and Stop -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/playButton"
+            android:id="@+id/playToggleButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/play_noise" />
 
         <Button
-            android:id="@+id/stopButton"
-            android:layout_width="0dp"
+            android:id="@+id/addPointButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/stop_noise" />
+            android:text="@string/plus_symbol" />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,7 +1,5 @@
 package com.spooner.studios.customnoisegenerator;
 
-import static android.graphics.Color.argb;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,18 +9,31 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GraphCanvas extends View {
+
+    public interface OnPointMovedListener {
+        void onPointMoved();
+    }
+
+    private OnPointMovedListener pointMovedListener;
+
+    // Method to set the listener
+    public void setOnPointMovedListener(OnPointMovedListener listener) {
+        this.pointMovedListener = listener;
+    }
+
+
     private Paint circlePaint, linePaint, marginPaint;
-
-
     public List<MoveableCircle> points = new ArrayList<>();
     private float canvasWidth, canvasHeight;
-    private Map<Integer, MoveableCircle> selectedCircles = new HashMap<>();
+    private final Map<Integer, MoveableCircle> selectedCircles = new HashMap<>();
     private final int circleRadius = 50;
     private RectF marginRect;
 
@@ -58,7 +69,7 @@ public class GraphCanvas extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         // Draw the margin rectangle
@@ -117,6 +128,9 @@ public class GraphCanvas extends View {
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
                 selectedCircles.remove(pointerId);
+                if (pointMovedListener != null) {
+                    pointMovedListener.onPointMoved();
+                }
                 return true;
             }
         }

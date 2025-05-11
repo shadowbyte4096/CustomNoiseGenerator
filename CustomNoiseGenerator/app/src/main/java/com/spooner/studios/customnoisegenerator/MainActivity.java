@@ -8,14 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GraphCanvas.OnPointMovedListener {
     private GraphCanvas frequencyGraph;
     private NoiseGenerator noiseGenerator;
-    private Button playButton;
-    private Button stopButton;
+    private Button playToggleButton;
     private Button addPointButton;
     private Button removePointButton;
-    private boolean canRemovePoint;
+    private boolean IsPlaying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,28 +22,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         frequencyGraph = findViewById(R.id.frequencyGraph);
-        playButton = findViewById(R.id.playButton);
-        stopButton = findViewById(R.id.stopButton);
+        playToggleButton = findViewById(R.id.playToggleButton);
         addPointButton = findViewById(R.id.addPointButton);
         removePointButton = findViewById(R.id.removePointButton);
         noiseGenerator = new NoiseGenerator();
 
-        playButton.setOnClickListener(this::Play);
-        stopButton.setOnClickListener(this::Stop);
+        frequencyGraph.setOnPointMovedListener(this);
 
+        playToggleButton.setOnClickListener(this::PlayToggle);
         addPointButton.setOnClickListener(this::AddPoint);
         removePointButton.setOnClickListener(this::RemovePoint);
 
         OnPointAmountChange();
     }
 
-    public void Play(View v){
+    @Override
+    public void onPointMoved() {
+        if (IsPlaying){
+            Play();
+        }
+    }
+
+    public void PlayToggle(View v){
+        if (IsPlaying){
+            Stop();
+            playToggleButton.setText(R.string.play_noise);
+        } else {
+            Play();
+            playToggleButton.setText(R.string.stop_noise);
+        }
+    }
+
+    public void Play(){
+        IsPlaying = true;
         List<Position> positions = frequencyGraph.GetPositions();
         noiseGenerator.stop();
         noiseGenerator.GenerateNoise(positions);
     }
 
-    public void Stop(View v){
+    public void Stop(){
+        IsPlaying = false;
         noiseGenerator.stop();
     }
 
@@ -60,5 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void OnPointAmountChange(){
         removePointButton.setEnabled(frequencyGraph.GetPositions().size() > 2);
+        onPointMoved();
     }
 }
