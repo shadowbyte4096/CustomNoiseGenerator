@@ -1,5 +1,7 @@
 package com.spooner.studios.customnoisegenerator;
 
+import static android.graphics.Color.argb;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -35,7 +37,7 @@ public class GraphCanvas extends View {
         circlePaint.setStyle(Paint.Style.FILL);
 
         linePaint = new Paint();
-        linePaint.setColor(Color.RED);
+        linePaint.setColor(Color.WHITE);
         linePaint.setStrokeWidth(5);
 
         marginPaint = new Paint();
@@ -51,8 +53,8 @@ public class GraphCanvas extends View {
 
         marginRect = new RectF(circleRadius, circleRadius, canvasWidth - circleRadius, canvasHeight - circleRadius);
 
-        points.add(new MoveableCircle(circleRadius, canvasHeight/2, circleRadius, Color.RED));
-        points.add(new MoveableCircle(canvasWidth/2, canvasHeight/2, circleRadius, Color.GREEN));
+        points.add(new MoveableCircle(circleRadius, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
+        points.add(new MoveableCircle(canvasWidth/2, canvasHeight/2, circleRadius, Color.rgb(30 ,30 ,30)));
     }
 
     @Override
